@@ -1,0 +1,26 @@
+At First try:
+
+public class BitCounting {
+
+  public static int countBits(int n){
+    String num = Integer.toBinaryString(n);
+       int no = 0;
+     for (int i = 0; i < num.length(); i++){
+       if (num.charAt(i) == '1'){
+         no = no + 1;
+       }
+     }
+    return no;
+  }
+}
+
+Refactored Code:
+
+public class BitCounting {
+
+  public static int countBits(int n){
+    
+    return Integer.bitCount(n);
+  }
+  
+}
