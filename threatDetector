@@ -1,0 +1,43 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+#
+# Complete the 'threatDetector' function below.
+#
+# The function accepts STRING_ARRAY textMessages as parameter.
+#
+from itertools import groupby 
+  
+def threatDetector(textMessages):
+    # Write your code here
+    print(textMessages)
+    res = []
+    answer = ''
+    for text in textMessages:
+        sign = text[-3:]
+        add = 0
+        for i in text:
+            res = [len(list(j)) for _, j in groupby(text)] 
+        for num in res:
+            if (num > 2):
+                add += num
+        score = ""
+        if add > 0 and add < 11:
+            score = 'Possible'
+        elif add >= 11 and add < 41:
+            score = 'Probable'
+        elif add >= 41 and add < 150:
+            score = 'Escalate'
+        else :
+            score = 'Ignore'
+        
+        answer = answer + sign + " " + score + "\n"
+        print(add)
+        print(answer)
+    return answer
