@@ -24,8 +24,10 @@ Guaranteed constraints:
 
 The element in a that occurs in the array more than once and has the minimal index for its second occurrence. If there are no such elements, return -1.
 
+https://app.codesignal.com/interview-practice/task/pMvymcahZ8dY4g75q
+
 #SOLUTIONS
-////////// PYTHON SOLUTION ////////////////
+////////// PYTHON SOLUTION (First Attempt  - Failed three tests)////////////////
 def firstDuplicate(a):
     duplicates = set()
     print(a)
@@ -41,3 +43,27 @@ def firstDuplicate(a):
         else:
             ans = -1
     return ans
+    
+    ///////////(Second Attempt - Passed all test)//////////
+    def firstDuplicate(a):
+    duplicates = {}
+    for i in range(len(a)):
+        if a[i] in duplicates:
+            return a[i]
+        else:
+            duplicates[a[i]] = 1
+    return -1
+    
+     ///////////(JAVA CODE)//////////
+    int firstDuplicate(int[] a) {
+    Map<Integer, Integer> duplicates = new HashMap<>();
+    for (int i = 0; i < a.length; i++){
+        if (duplicates.containsKey(a[i])){
+            return a[i];
+        }
+        else {
+            duplicates.put(a[i], 1);
+        }
+    }
+    return -1;
+}
