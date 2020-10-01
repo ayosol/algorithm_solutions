@@ -23,3 +23,21 @@ Guaranteed constraints:
 [output] integer
 
 The element in a that occurs in the array more than once and has the minimal index for its second occurrence. If there are no such elements, return -1.
+
+#SOLUTIONS
+////////// PYTHON SOLUTION ////////////////
+def firstDuplicate(a):
+    duplicates = set()
+    print(a)
+    ans, temp, minim = 0, 0, 0
+    for i in range(len(a)):
+        print(a.count(a[i]))
+        if a.count(a[i]) > 1:
+            if a[i] in duplicates:
+                return a[i]
+            duplicates.add(a[i])
+            print(duplicates)
+            ans = a[i]
+        else:
+            ans = -1
+    return ans
