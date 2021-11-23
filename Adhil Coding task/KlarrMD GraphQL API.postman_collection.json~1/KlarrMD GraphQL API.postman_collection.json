@@ -1,0 +1,342 @@
+{
+	"info": {
+		"_postman_id": "03cc5bfb-44c6-4426-95b6-929b516ad110",
+		"name": "KlarrMD GraphQL API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation Register(\r\n  $emailAddress: String!\r\n  $fullName: String!\r\n  $password: String!\r\n  $dialCode: String!\r\n  $phoneNumber: String!\r\n  $isSpecialistPhysician: Boolean!\r\n) {\r\n  register(\r\n    registerInput: {\r\n      emailAddress: $emailAddress\r\n      fullName: $fullName\r\n      password: $password\r\n      dialCode: $dialCode\r\n      phoneNumber: $phoneNumber\r\n      isSpecialistPhysician: $isSpecialistPhysician\r\n    }) \r\n    {\r\n    id\r\n    message\r\n    emailAddress\r\n    phoneNumber\r\n    fullName\r\n    token\r\n    instruction\r\n    streamChatToken\r\n  }\r\n}\r\n",
+						"variables": "{\r\n  \"emailAddress\": \"testuser@testuser.com\",\r\n  \"fullName\": \"Test User\",\r\n  \"dialCode\": \"+44\",\r\n  \"phoneNumber\" :\"7557771497\",\r\n  \"isSpecialistPhysician\": true,\r\n  \"password\": \"Ghana10#\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://klarmd.herokuapp.com/graphql",
+					"protocol": "https",
+					"host": [
+						"klarmd",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VerifyPhoneCode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation VerifyPhoneCode(\r\n  $phoneNumber:String!\r\n  $code:String!\r\n) {\r\n  verifyPhoneCode(verifyPhoneInput :{\r\n    phoneNumber:$phoneNumber\r\n    code:$code\r\n  }){\r\n      isPhoneVerified\r\n      phoneNumber\r\n      token\r\n      user{\r\n        id,\r\n        fullName,\r\n        emailAddress,\r\n        phoneNumber,\r\n        isPhoneVerified,\r\n        role\r\n      }\r\n  }\r\n}",
+						"variables": "{\r\n  \"phoneNumber\": \"+447557771497\",\r\n  \"code\": \"111111\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://klarmd.herokuapp.com/graphql",
+					"protocol": "https",
+					"host": [
+						"klarmd",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VerifyEmailCode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation Login(\r\n  $emailAddress:String!\r\n  $phoneNumber:String!\r\n  $code:String!\r\n) {\r\n  login(loginInput :{\r\n    emailAddress:$emailAddress\r\n    phoneNumber:$phoneNumber\r\n    code:$code\r\n  }){\r\n      isEmailVerified\r\n      emailAddress\r\n      token\r\n      user{\r\n        id,\r\n        fullName,\r\n        emailAddress,\r\n        phoneNumber,\r\n        isPhoneVerified,\r\n        role\r\n      }\r\n  }\r\n}",
+						"variables": "{\r\n  \"emailAddress\": \"testuser@testuser.com\",\r\n  \"phoneNumber\": \"+447557771497\",\r\n  \"code\": \"111111\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://klarmd.herokuapp.com/graphql",
+					"protocol": "https",
+					"host": [
+						"klarmd",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ResetPasswordFromMobile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ResetPasswordRequestFromMobile(\r\n  $emailAddress:String!\r\n) {\r\n  resetPasswordRequestFromMobile(\r\n      resetPasswordRequestInput :{\r\n    emailAddress:$emailAddress\r\n  }){\r\n      resetPasswordToken\r\n      resetUrl\r\n      user{\r\n        id,\r\n        fullName,\r\n        emailAddress,\r\n        phoneNumber\r\n      }\r\n  }\r\n}",
+						"variables": "{\r\n  \"emailAddress\": \"testuser@testuser.com\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://klarmd.herokuapp.com/graphql",
+					"protocol": "https",
+					"host": [
+						"klarmd",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePassword",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation UpdatePassword(\r\n  $emailAddress:String!\r\n  $password:String!\r\n  $confirmPassword:String!\r\n  $resetPasswordToken:String!\r\n) {\r\n  updatePassword(updatePasswordInput :{\r\n    emailAddress:$emailAddress\r\n    password:$password\r\n    confirmPassword:$confirmPassword\r\n    resetPasswordToken:$resetPasswordToken\r\n  }){\r\n      message\r\n      user{\r\n        id,\r\n        fullName,\r\n        emailAddress,\r\n        phoneNumber,\r\n        isPhoneVerified,\r\n        isPendingRoleChangeRequest,\r\n        role\r\n      }\r\n  }\r\n}",
+						"variables": "{\r\n  \"emailAddress\": \"testuser@testuser.com\",\r\n  \"password\": \"Ghana10#\",\r\n  \"confirmPassword\": \"Ghana10#\",\r\n  \"resetPasswordToken\": \"135613\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://klarmd.herokuapp.com/graphql",
+					"protocol": "https",
+					"host": [
+						"klarmd",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation Login(\r\n  $emailAddress:String!\r\n  $password:String!\r\n) {\r\n  login(loginInput :{\r\n    emailAddress:$emailAddress\r\n    password:$password\r\n  }){\r\n      token\r\n      user{\r\n        id,\r\n        fullName,\r\n        emailAddress,\r\n        phoneNumber,\r\n        isPhoneVerified,\r\n        isPendingRoleChangeRequest,\r\n        role\r\n      }\r\n  }\r\n}",
+						"variables": "{\r\n  \"emailAddress\": \"testuser@testuser.com\",\r\n  \"password\": \"Ghana10#\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://klarmd.herokuapp.com/graphql",
+					"protocol": "https",
+					"host": [
+						"klarmd",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllSpecialists",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbEFkZHJlc3MiOiJ0ZXN0dXNlckB0ZXN0dXNlci5jb20iLCJpZCI6IjRlZmRlNDM3LTljZTktNDFlOC05ZmZiLTNhYjJhZTgzZWQ1MCIsImlhdCI6MTYzMDc4OTE1NiwiZXhwIjoxNjMwODc1NTU2fQ.7RI06LLqVWWzxaSvnwQuyKZj5qJQOljXK6pdypQHh34",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query GetAllSpecialists {\r\n  getAllSpecialists {\r\n        id\r\n        fullName\r\n        emailAddress\r\n        phoneNumber\r\n  }\r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://klarmd.herokuapp.com/graphql",
+					"protocol": "https",
+					"host": [
+						"klarmd",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateSpecialistConsultationType",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbEFkZHJlc3MiOiJzcGlkZXJnZXVzZUBnbWFpbC5jb20iLCJpZCI6IjRlZmRlNDM3LTljZTktNDFlOC05ZmZiLTNhYjJhZTgzZWQ1MCIsImlhdCI6MTYzMDc2MDY5NCwiZXhwIjoxNjMwODQ3MDk0fQ.V_zjBigmux-FUMD5erLj308oHhgJ7rvLdcDVqucdCo8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateSpecialistConsultationType(\r\n  $types: [ConsultationTypeEnum!]!\r\n  $availableDate: DateTime!  \r\n  $startTime: String!\r\n  $endTime: String!\r\n) {\r\n  createSpecialistConsultationType(\r\n    createConsultationTypeInput: {\r\n      types: $types\r\n      availableDate: $availableDate\r\n      startTime: $startTime\r\n      endTime: $endTime\r\n    }) {\r\n        id\r\n        specialist {\r\n            id\r\n            physicianID\r\n            fullName\r\n            emailAddress\r\n            phoneNumber\r\n        }\r\n        types\r\n        availableDate\r\n        startTime\r\n        endTime\r\n        unAllocatedSlotInMinutes\r\n        appointmentId\r\n  }\r\n}\r\n",
+						"variables": "{\r\n  \"types\":[\"CHAT\", \"AUDIO_CALL\", \"VIDEO_CALL\"],\r\n  \"availableDate\": \"2021-09-01T00:00:00Z\",\r\n  \"startTime\": \"01:30\",\r\n  \"endTime\": \"02:00\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://klarmd.herokuapp.com/graphql",
+					"protocol": "https",
+					"host": [
+						"klarmd",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSpecialistCalendar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbEFkZHJlc3MiOiJzcGlkZXJnZXVzZUBnbWFpbC5jb20iLCJpZCI6IjRlZmRlNDM3LTljZTktNDFlOC05ZmZiLTNhYjJhZTgzZWQ1MCIsImlhdCI6MTYzMDc2MDY5NCwiZXhwIjoxNjMwODQ3MDk0fQ.V_zjBigmux-FUMD5erLj308oHhgJ7rvLdcDVqucdCo8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query GetSpecialistCalendar(\r\n  $startDate: DateTime!\r\n  $endDate: DateTime!\r\n  $specialistId: String!\r\n) {\r\n  getSpecialistCalendar(\r\n    getSpecialistCalendarInput: {\r\n      startDate: $startDate\r\n      endDate: $endDate\r\n      specialistId: $specialistId\r\n    }) {\r\n        consultationType{\r\n        id\r\n        specialist {\r\n            id\r\n            fullName\r\n            emailAddress\r\n            phoneNumber\r\n        }\r\n        types\r\n        availableDate\r\n        startTime\r\n        endTime\r\n        unAllocatedSlotInMinutes\r\n        appointmentId\r\n      }\r\n      isFree\r\n  }\r\n}\r\n",
+						"variables": "{\r\n  \"startDate\": \"2021-09-01T00:00:00.000Z\",\r\n  \"endDate\": \"2021-09-04T00:00:00.000Z\",\r\n  \"specialistId\": \"4efde437-9ce9-41e8-9ffb-3ab2ae83ed50\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://klarmd.herokuapp.com/graphql",
+					"protocol": "https",
+					"host": [
+						"klarmd",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateGroupChatChannel",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbEFkZHJlc3MiOiJzcGlkZXJnZXVzZUBnbWFpbC5jb20iLCJpYXQiOjE2MjU1MDY3MDIsImV4cCI6MTYyNTU5MzEwMn0.oaY9JG8hl4RrLpN43kKKIkT0DpHYt7rJDK7PIHfpQG8",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbEFkZHJlc3MiOiJzcGlkZXJnZXVzZUBnbWFpbC5jb20iLCJpZCI6IjRlZmRlNDM3LTljZTktNDFlOC05ZmZiLTNhYjJhZTgzZWQ1MCIsImlhdCI6MTYyNTk0Nzk4NywiZXhwIjoxNjI2MDM0Mzg3fQ.EGBaqYYtjNFm7BJhoQKOaR2dJz7JljNeAi8OMC_xmUk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateGroupChatChannel(\r\n  $description: String!\r\n  $groupName: String!\r\n  $maxParticipants: Float!\r\n  $location: String!\r\n) {\r\n  createGroupChatChannel(\r\n\t\tcreateGroupChatChannelInput: {\r\n      groupName: $groupName\r\n      maxParticipants: $maxParticipants\r\n      location:$location\r\n      description: $description\r\n    }\r\n  ) {\r\n      id\r\n      ownerId\r\n      moderatorId\r\n      description\r\n      groupName\r\n      maxParticipants\r\n      location\r\n  }\r\n}",
+						"variables": "{\r\n    \"description\": \"Test Group\",\r\n    \"groupName\": \"Test Name\",\r\n    \"maxParticipants\": 10,\r\n    \"location\": \"London\",\r\n    \"user\": {\r\n                \"id\": \"4efde437-9ce9-41e8-9ffb-3ab2ae83ed50\",\r\n                \"fullName\": \"Test Name\",\r\n                \"emailAddress\": \"testuser@testuser.com\",\r\n                \"phoneNumber\": \"+447557771497\",\r\n                \"isPhoneVerified\": true,\r\n                \"isPendingRoleChangeRequest\": true,\r\n                \"role\": \"PHYSICIAN\"\r\n            }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://klarmd.herokuapp.com/graphql",
+					"protocol": "https",
+					"host": [
+						"klarmd",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddMemberToGroup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbEFkZHJlc3MiOiJzcGlkZXJnZXVzZUBnbWFpbC5jb20iLCJpZCI6IjRlZmRlNDM3LTljZTktNDFlOC05ZmZiLTNhYjJhZTgzZWQ1MCIsImlhdCI6MTYyNTk0Nzk4NywiZXhwIjoxNjI2MDM0Mzg3fQ.EGBaqYYtjNFm7BJhoQKOaR2dJz7JljNeAi8OMC_xmUk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation AddMemberToGroup(\r\n  $userId: String!\r\n  $groupId: String!\r\n) {\r\n  addMemberToGroup(\r\n\t\taddMemberToGroupInput: {\r\n      userId: $userId\r\n      groupId: $groupId\r\n    }\r\n  ) \r\n}",
+						"variables": "{\r\n    \"userId\": \"201bc836-6c0a-4900-9928-3b3c0d27fefe\",\r\n    \"groupId\": \"eb60b539-f82d-4c87-9765-0fe0d7c024c9\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://klarmd.herokuapp.com/graphql",
+					"protocol": "https",
+					"host": [
+						"klarmd",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

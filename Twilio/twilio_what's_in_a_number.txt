@@ -1,0 +1,69 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+#
+# Complete the 'validatePhoneNumberFormat' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING address as parameter.
+#
+
+def validatePhoneNumberFormat(address):
+    channel = address.split(':')
+    if len(channel) == 1:
+        if address[0] == '+':
+            address = address[1:]
+        if len(address) > 15:
+            return "INVALID_ADDRESS"
+        if address[0] == '0':
+            return "INVALID_ADDRESS"
+        if address.isnumeric():
+            return 'SMS'
+            
+    elif len(channel) > 2:
+        return  "INVALID_ADDRESS"   
+        
+    else:
+        if ' ' in address:
+            return 'INVALID_ADDRESS'
+        if len(channel[1]) > 248:
+            return 'INVALID_ADDRESS'
+        if len(channel[1]) < 1:
+            return 'INVALID_ADDRESS'
+        if channel[0].lower() == 'wechat':
+            return 'WECHAT'
+        if channel[0].lower() == 'whatsapp':
+           
+            print(channel)
+            if channel[1][0] == '+':
+                channel[1] = channel[1][1:]
+            if len(channel[1]) > 15:
+                return "INVALID_ADDRESS"
+            if channel[1][0] == '0':
+                return "INVALID_ADDRESS"
+            if channel[1].isnumeric():
+                return 'WHATSAPP'
+        if channel[0].lower() == 'messenger':
+            if len(channel[1]) > 248:
+                return 'INVALID_ADDRESS'
+            if channel[1][0] == '+':
+                channel[1] = channel[1][1:]
+            if len(channel[1]) > 15:
+                return "INVALID_ADDRESS"
+            if channel[1][0] == '0':
+                return "INVALID_ADDRESS"
+            if channel[1].isnumeric():
+                return 'MESSENGER'
+    
+    
+    return "INVALID_ADDRESS"
+        
+
+if __name__ == '__main__':

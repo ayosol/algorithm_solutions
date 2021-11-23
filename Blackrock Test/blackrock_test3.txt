@@ -1,0 +1,82 @@
+Exchange Rate Calculator
+Programming challenge description:
+A currency pair is the quotation of two currencies, with the value of one currency being quoted against the other. Currencies are identified by a three letter alphabetic ISO code they are associated with on the international market.
+
+The first listed currency of a currency pair is called the base currency and the second currency is called the quote currency. It indicates how much of the quote currency is needed to purchase one unit of the base currency.
+
+For example, the quotation EURUSD 1.25 means that one Euro is exchanged for 1.25 US Dollars. EUR is the base currency and USD is the quote currency.
+
+Given a list of currency pair quotations calculate the provided exchange rate.
+
+If the requested currency pairs are the same, for example, USDUSD, then the exchange rate is always 1.00
+
+Likewise if you have a rate for USDGBP and you need GBPUSD then you can invert the rate to obtain the exchange rate.
+
+Input:
+A list of currency exchange rates separated by ';'. A currency pair to calculate separated by '|' from the rest of the input.
+
+Output:
+Calculated exchange rate for the provided currency pair. Required precision is 2 decimal points.
+
+If you cannot calculate the exchange rate the expected output should be:
+
+'Unable to determine rate for <currency pair>'.
+
+Examples
+
+Example 1
+Input:
+
+EURUSD:1.20;USDGBP:0.70|EURGBP
+Output:
+
+EURGBP:0.84
+Example 2
+Input:
+
+EURUSD:1.20;USDGBP:0.70|GBPEUR
+Output:
+
+GBPEUR:1.19
+Example 3
+Input:
+
+EURUSD:1.20;USDGBP:0.70|GBPJPY
+Output:
+
+Unable to determine rate for GBPJPY
+Example 4
+Input:
+
+EURUSD:1.20;USDGBP:0.70;GBPJPY:154.92|EURJPY
+Output:
+
+EURJPY:130.13
+Test 1
+Test Input
+Download Test 1 Input
+EURNOK:10.10;EURSEK:10.20;EURGBP:0.86|EURGBP
+Expected Output
+Download Test 1 Input
+EURGBP:0.86
+Test 2
+Test Input
+Download Test 2 Input
+EURNOK:10.10;EURSEK:10.20;EURGBP:0.86|GBPEUR
+Expected Output
+Download Test 2 Input
+GBPEUR:1.16
+Test 3
+Test Input
+Download Test 3 Input
+EURNOK:10.10;EURSEK:10.20;EURGBP:0.86|NOKNOK
+Expected Output
+Download Test 3 Input
+NOKNOK:1.00
+Test 4
+Test Input
+Download Test 4 Input
+EURNOK:10.10;EURSEK:10.20;EURGBP:0.86|GBPJPY
+Expected Output
+Download Test 4 Input
+Unable to determine rate for GBPJPY

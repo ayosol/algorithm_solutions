@@ -1,0 +1,42 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+#
+# Complete the 'validateImageSize' function below.
+#
+# The function is expected to return a 2D_STRING_ARRAY.
+# The function accepts following parameters:
+#  1. 2D_STRING_ARRAY imageUrls
+#  2. STRING maxSize
+#
+
+def validateImageSize(imageUrls, maxSize):
+    maxIntSize = 0
+    size = len(maxSize)
+    if maxSize[-2:].lower() == "kb":
+        maxIntSize = int(maxSize[:size-2]) * 1000
+    elif maxSize[-2:].lower() == "mb":
+        maxIntSize = int(maxSize[:size-2]) * 1000000
+    elif maxSize[-2:].lower() == "gb":
+        maxIntSize = int(maxSize[:size-2]) * 1000000000
+    else:
+        maxIntSize = 1000000
+        
+    for i in imageUrls:
+        s = int(i[1])
+        print(s)
+        if s <= maxIntSize:
+            i[1] = 'TRUE'
+        else:
+            i[1] = 'FALSE'
+            
+    return imageUrls
+            
+            
+if __name__ == '__main__':
